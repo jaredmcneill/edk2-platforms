@@ -201,7 +201,7 @@ DefinitionBlock ("Dsdt.aml", "DSDT", 5, "MSFT", "EDK2", 2)
         Name (RBUF, ResourceTemplate ()
         {
           Memory32Fixed (ReadWrite, 0xFE00B880, 0x00000024,)
-          Interrupt(ResourceConsumer, Level, ActiveHigh, Exclusive) { 0x61 }
+          Interrupt(ResourceConsumer, Level, ActiveHigh, Exclusive) { 0x41 }
         })
         Return (RBUF)
       }
@@ -224,7 +224,7 @@ DefinitionBlock ("Dsdt.aml", "DSDT", 5, "MSFT", "EDK2", 2)
         Name (RBUF, ResourceTemplate ()
         {
           Memory32Fixed (ReadWrite, 0xFE00B840, 0x00000010,)
-          Interrupt(ResourceConsumer, Level, ActiveHigh, Exclusive) { 0x62 }
+          Interrupt(ResourceConsumer, Level, ActiveHigh, Exclusive) { 0x42 }
         })
         Return (RBUF)
       }
@@ -260,8 +260,10 @@ DefinitionBlock ("Dsdt.aml", "DSDT", 5, "MSFT", "EDK2", 2)
         Name (RBUF, ResourceTemplate ()
         {
           MEMORY32FIXED (ReadWrite, 0xFE200000, 0xB4, )
-          Interrupt (ResourceConsumer, Level, ActiveHigh, Shared) { 0x51 }
-          Interrupt (ResourceConsumer, Level, ActiveHigh, Shared) { 0x53 }
+          Interrupt (ResourceConsumer, Level, ActiveHigh, Shared) { 0x91 }
+          Interrupt (ResourceConsumer, Level, ActiveHigh, Shared) { 0x92 }
+          Interrupt (ResourceConsumer, Level, ActiveHigh, Shared) { 0x93 }
+          Interrupt (ResourceConsumer, Level, ActiveHigh, Shared) { 0x94 }
         })
         Return (RBUF)
       }
@@ -283,7 +285,7 @@ DefinitionBlock ("Dsdt.aml", "DSDT", 5, "MSFT", "EDK2", 2)
         Name (RBUF, ResourceTemplate ()
         {
           Memory32Fixed(ReadWrite, 0xFE804000, 0x20)
-          Interrupt(ResourceConsumer, Level, ActiveHigh, Shared) {0x55}
+          Interrupt(ResourceConsumer, Level, ActiveHigh, Shared) {0x95}
 
           //
           // MsftFunctionConfig is encoded as the VendorLong.
@@ -321,7 +323,7 @@ DefinitionBlock ("Dsdt.aml", "DSDT", 5, "MSFT", "EDK2", 2)
         Name (RBUF, ResourceTemplate()
         {
           Memory32Fixed (ReadWrite, 0xFE805000, 0x20)
-          Interrupt (ResourceConsumer, Level, ActiveHigh, Shared) {0x55}
+          Interrupt (ResourceConsumer, Level, ActiveHigh, Shared) {0x95}
         })
         Return (RBUF)
       }
@@ -343,7 +345,7 @@ DefinitionBlock ("Dsdt.aml", "DSDT", 5, "MSFT", "EDK2", 2)
         Name (RBUF, ResourceTemplate ()
         {
           MEMORY32FIXED (ReadWrite, 0xFE204000, 0x20,)
-          Interrupt(ResourceConsumer, Level, ActiveHigh, Shared) {0x56}
+          Interrupt(ResourceConsumer, Level, ActiveHigh, Shared) {0x96}
 
           //
           // MsftFunctionConfig is encoded as the VendorLong.
@@ -408,7 +410,7 @@ DefinitionBlock ("Dsdt.aml", "DSDT", 5, "MSFT", "EDK2", 2)
         Name (RBUF, ResourceTemplate ()
         {
           MEMORY32FIXED (ReadWrite, 0xFE215080, 0x40,)
-          Interrupt (ResourceConsumer, Level, ActiveHigh, Shared,) {0x3D}
+          Interrupt (ResourceConsumer, Level, ActiveHigh, Shared,) {0x7D}
 
           //
           // MsftFunctionConfig is encoded as the VendorLong.
@@ -460,7 +462,7 @@ DefinitionBlock ("Dsdt.aml", "DSDT", 5, "MSFT", "EDK2", 2)
     //     Name (RBUF, ResourceTemplate ()
     //     {
     //       MEMORY32FIXED (ReadWrite, 0xFE2150C0, 0x40,)
-    //       Interrupt (ResourceConsumer, Level, ActiveHigh, Shared,) {0x3D}
+    //       Interrupt (ResourceConsumer, Level, ActiveHigh, Shared,) {0x7D}
     //     })
     //     Return (RBUF)
     //   }
