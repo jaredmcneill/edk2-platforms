@@ -10,7 +10,8 @@
  **/
 
 //
-// Note: UEFI can use either SDHost or Arasan. We expose both to the OS.
+// Note: UEFI can use either SDHost or Arasan. We expose both to the OS,
+// along with eMMC2.
 //
 
 // ArasanSD 3.0 SD Host Controller.
@@ -33,7 +34,7 @@ Device (SDC1)
     Name (RBUF, ResourceTemplate ()
     {
       MEMORY32FIXED (ReadWrite, 0xFE300000, 0x100,)
-      Interrupt (ResourceConsumer, Level, ActiveHigh, Exclusive) { 0x9E }
+      Interrupt (ResourceConsumer, Level, ActiveHigh, Shared) { 0x9E }
     })
     Return (RBUF)
   }
@@ -53,8 +54,7 @@ Device (SDC1)
       Return (0) // 0 - fixed
     }
   }
-}
-
+} 
 
 // Broadcom SDHost 2.0 SD Host Controller
 Device (SDC2)
@@ -94,6 +94,53 @@ Device (SDC2)
     Method (_RMV) // Is removable
     {
       Return (0) // 0 - fixed
+    }
+  }
+
+  // Broadcom eMMC2 SD Host Controller.
+  Device (SDC3)
+  {
+    Name (_HID, "PNP0D40")
+    Name (_UID, 0x0)
+    Name (_CCA, 0x0)
+    Name (_S1D, 0x1)
+    Name (_S2D, 0x1)
+    Name (_S3D, 0x1)
+    Name (_S4D, 0x1)
+    Method (_STA)
+    {
+      Return(0xf)
+    }
+    Method (_CRS, 0x0, Serialized)
+    {
+      Name (RBUF, ResourceTemplate ()
+      {
+        MEMORY32FIXED (ReadWrite, 0xFE340000, 0x100,)
+        Interrupt (ResourceConsumer, Level, ActiveHigh, Shared) { 0x9E }
+      })
+      Return (RBUF)
+    }
+    Name (_DSD, Package () {
+      ToUUID("daffd814-6eba-4d8c-8a91-bc9bbf4aa301"),
+      Package () {
+        Package () {"clock-frequency", 100000000},
+      }
+    })
+
+    //
+    // A child device that represents the
+    // sd card, which is marked as non-removable.
+    //
+    Device (SDMM)
+    {
+      Method (_ADR)
+      {
+        Return (0)
+      }
+      Method (_RMV) // Is removable
+      {
+        Return (0) // 0 - fixed
+      }
     }
   }
 }
